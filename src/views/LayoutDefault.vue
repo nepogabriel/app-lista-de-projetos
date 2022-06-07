@@ -16,11 +16,13 @@
   import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent} from "@ionic/vue";
 
   export default {
-    IonPage,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
+    components: {
+      IonPage,
+      IonHeader,
+      IonToolbar,
+      IonTitle,
+      IonContent,
+    }
   }
 </script>
 

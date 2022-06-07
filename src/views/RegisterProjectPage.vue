@@ -33,6 +33,8 @@
   import {IonInput} from '@ionic/vue';
 
   export default {
-    IonInput
+    components: {
+      IonInput
+    }
   }
 </script>
