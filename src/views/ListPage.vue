@@ -44,9 +44,9 @@ ion-button {
   position: fixed;
   bottom: 20px;
   right: 2.5rem;
-  height: 4.5rem;
-  width: 4.5rem;
-  font-size: 3rem;
-  --background: var(--ion-color-success-tint);
+  height: 3.5rem;
+  width: 3.5rem;
+  font-size: 2rem;
+  --background: var(--ion-color-primary);
 }
 </style>

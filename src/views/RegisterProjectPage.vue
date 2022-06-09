@@ -26,14 +26,21 @@
         <ion-textarea v-model="referencias" placeholder="Informe uma referência por linha"></ion-textarea>
       </ion-item>
     </ion-list>
-    <ion-button @click="saveLocal(nome, descricao, valor, acoes, referencias)" class="button button-save">Salvar</ion-button>
 
-    <ion-button class="button button-cancel" router-link="/home">x</ion-button>
+    <ion-button @click="saveLocal(nome, descricao, valor, acoes, referencias)" class="button button-save">
+      <ion-icon name="checkmark-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button class="button button-cancel" router-link="/home">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
   </layout-default>
 </template>
 
 <script>
-  import {IonList, IonItem, IonLabel, IonInput, IonTextarea, IonButton} from '@ionic/vue';
+  import {IonList, IonItem, IonLabel, IonInput, IonTextarea, IonButton, IonIcon} from '@ionic/vue';
+  import {addIcons} from "ionicons";
+  import {checkmarkOutline, closeOutline} from "ionicons/icons";
 
   export default {
     components: {
@@ -43,6 +50,13 @@
       IonInput,
       IonTextarea,
       IonButton,
+      IonIcon,
+    },
+    created() {
+      addIcons({
+        'checkmark-outline': checkmarkOutline,
+        'close-outline': closeOutline,
+      });
     },
     data() {
       return {
@@ -62,6 +76,8 @@
           acoes: acoes,
           referencias: referencias
         }))
+
+        console.log(localStorage.projeto);
       }
     }
   }
@@ -71,16 +87,18 @@
 .button {
   position: fixed;
   bottom: 20px;
-  min-width: 4.5rem;
-  height: 4.5rem;
+  min-width: 3.5rem;
+  height: 3.5rem;
 }
+
 .button-save {
-  left: 2.5rem;
+  left: 1rem;
   font-size: 1.5rem;
 }
-  .button-cancel {
-    right: 2.5rem;
-    font-size: 3rem;
-    --background: var(--ion-color-danger);
-  }
+
+.button-cancel {
+  right: 1.5rem;
+  font-size: 1.5rem;
+  --background: var(--ion-color-danger);
+}
 </style>
