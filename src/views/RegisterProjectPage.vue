@@ -27,8 +27,9 @@
       </ion-item>
     </ion-list>
 
-    <ion-button @click="saveLocal(nome, descricao, valor, acoes, referencias)" class="button button-save">
-      <ion-icon name="checkmark-outline"></ion-icon>
+    <ion-button @click="registerProject({nome, descricao, valor, acoes, referencias})" class="button button-save">
+      <ion-spinner v-if="registrando" name="dots"></ion-spinner>
+      <ion-icon v-if="!registrando" name="checkmark-outline"></ion-icon>
     </ion-button>
 
     <ion-button class="button button-cancel" router-link="/home">
@@ -39,6 +40,7 @@
 
 <script>
   import {IonList, IonItem, IonLabel, IonInput, IonTextarea, IonButton, IonIcon} from '@ionic/vue';
+  import {IonSpinner} from '@ionic/vue';
   import {addIcons} from "ionicons";
   import {checkmarkOutline, closeOutline} from "ionicons/icons";
 
@@ -51,6 +53,7 @@
       IonTextarea,
       IonButton,
       IonIcon,
+      IonSpinner
     },
     created() {
       addIcons({
@@ -65,21 +68,53 @@
         valor: '',
         acoes: '',
         referencias: '',
+        registrando: false,
       }
     },
     methods: {
-      saveLocal(nome, descricao, valor, acoes, referencias) {
-        localStorage.setItem('projeto', JSON.stringify({
-          nome: nome,
-          descricao: descricao,
-          valor: valor,
-          acoes: acoes,
-          referencias: referencias
-        }))
-
-        console.log(localStorage.projeto);
-      }
-    }
+    async registerProject({nome, descricao, valor, acoes, referencias}) {
+        this.registrando = true;
+        console.log(JSON.stringify({nome, descricao, valor, acoes, referencias}));
+      return await fetch(
+          'https://apival.pousadatucanodomarahu.com.br/api/app/create',
+          {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+             nome,
+              descricao,
+              valor,
+              acoes,
+              referencias,
+            }),
+          }
+      )
+          .then((response) => {
+            this.registrando = false;
+            switch (true) {
+              case response.status >= 100 && response.status < 200:
+                return false;
+              case response.status >= 200 && response.status < 300:
+                alert('Projeto cadastrado com sucesso!');
+                return true;
+              case response.status >= 400 && response.status < 500:
+                return false;
+              case response.status >= 500 && response.status < 600:
+                return false;
+              default:
+                return false;
+            }
+          })
+          .catch((error) => {
+                this.registrando = false;
+                alert(`Erro ao tentar se comunicar com o servidor.\n\n${error}`)
+          }
+          );
+    },
+    },
   }
 </script>
 
