@@ -14,7 +14,7 @@
     </ion-item>
     </ion-list>
     <ion-button class="button button-cancel" @click="voltar()" router-link="/home">
-      ←
+      ←a
     </ion-button>
   </layout-default>
  </template>
