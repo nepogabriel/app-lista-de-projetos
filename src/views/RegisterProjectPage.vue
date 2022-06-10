@@ -74,7 +74,6 @@
     methods: {
     async registerProject({nome, descricao, valor, acoes, referencias}) {
         this.registrando = true;
-        console.log(JSON.stringify({nome, descricao, valor, acoes, referencias}));
       return await fetch(
           'https://apival.pousadatucanodomarahu.com.br/api/app/create',
           {

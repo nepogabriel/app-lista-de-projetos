@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "lista_de_contatos",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}
