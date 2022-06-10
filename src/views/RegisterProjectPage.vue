@@ -95,22 +95,14 @@
           .then((response) => {
             this.registrando = false;
             switch (true) {
-              case response.status >= 100 && response.status < 200:
-                return false;
               case response.status >= 200 && response.status < 300:
-                alert('Projeto cadastrado com sucesso!');
                 return true;
-              case response.status >= 400 && response.status < 500:
-                return false;
-              case response.status >= 500 && response.status < 600:
-                return false;
               default:
                 return false;
             }
           })
-          .catch((error) => {
+          .catch(() => {
                 this.registrando = false;
-                alert(`Erro ao tentar se comunicar com o servidor.\n\n${error}`)
           }
           );
     },

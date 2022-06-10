@@ -70,9 +70,8 @@
                   return false;
               }
             })
-            .catch((error) => {
+            .catch(() => {
               this.carregando = false;
-              alert(`Erro ao tentar se comunicar com o servidor.\n\n${error}`)
               return false;
             });
       },
@@ -80,7 +79,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .button {
   position: fixed;
   bottom: 20px;
